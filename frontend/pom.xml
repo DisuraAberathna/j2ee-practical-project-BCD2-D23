@@ -11,7 +11,7 @@
 
     <artifactId>frontend</artifactId>
     <packaging>war</packaging>
-    <name>j2ee-practical</name>
+    <name>j2ee-practical-web</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
