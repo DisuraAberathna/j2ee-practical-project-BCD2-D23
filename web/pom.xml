@@ -9,7 +9,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>frontend</artifactId>
+    <artifactId>web</artifactId>
     <packaging>war</packaging>
     <name>j2ee-practical-web</name>
 
