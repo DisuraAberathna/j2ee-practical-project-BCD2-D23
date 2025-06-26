@@ -8,6 +8,9 @@
     <artifactId>j2ee-practical-project</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>frontend</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
