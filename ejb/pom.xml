@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>ejb</artifactId>
+    <packaging>ejb</packaging>
+    <name>j2ee-practical-ejb</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -17,4 +19,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+    </build>
 </project>
