@@ -6,7 +6,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email")
+@NamedQueries({
+        @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email"),
+        @NamedQuery(name = "User.findByEmailAndPassword", query = "select u from User u where u.email = :email and u.password = :password"),
+})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
