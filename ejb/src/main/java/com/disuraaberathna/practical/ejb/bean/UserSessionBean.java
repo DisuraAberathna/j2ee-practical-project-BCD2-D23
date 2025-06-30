@@ -1,7 +1,7 @@
 package com.disuraaberathna.practical.ejb.bean;
 
 import com.disuraaberathna.practical.core.model.User;
-import com.disuraaberathna.practical.ejb.remote.UserService;
+import com.disuraaberathna.practical.core.service.UserService;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
