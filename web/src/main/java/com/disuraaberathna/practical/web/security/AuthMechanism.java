@@ -8,9 +8,12 @@ import jakarta.security.enterprise.authentication.mechanism.http.AuthenticationP
 import jakarta.security.enterprise.authentication.mechanism.http.AutoApplySession;
 import jakarta.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
 import jakarta.security.enterprise.authentication.mechanism.http.HttpMessageContext;
+import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 @AutoApplySession
 @ApplicationScoped
@@ -22,8 +25,22 @@ public class AuthMechanism implements HttpAuthenticationMechanism {
     public AuthenticationStatus validateRequest(HttpServletRequest request, HttpServletResponse response, HttpMessageContext context) throws AuthenticationException {
         AuthenticationParameters authParams = context.getAuthParameters();
 
-        if (authParams != null) {
+        if (authParams.getCredential() != null) {
+            CredentialValidationResult result = identityStore.validate(authParams.getCredential());
 
+            if (result.getStatus() == CredentialValidationResult.Status.VALID) {
+                return context.notifyContainerAboutLogin(result);
+            } else {
+                return AuthenticationStatus.SEND_FAILURE;
+            }
+        }
+
+        if (context.isProtected() && context.getCallerPrincipal() == null) {
+            try {
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
+            } catch (IOException e) {
+                throw new RuntimeException("Redirect to login failed", e);
+            }
         }
 
         return context.doNothing();
