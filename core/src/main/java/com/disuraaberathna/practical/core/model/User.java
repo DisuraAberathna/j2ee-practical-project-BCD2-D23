@@ -2,9 +2,12 @@ package com.disuraaberathna.practical.core.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "users")
-public class User {
+@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
