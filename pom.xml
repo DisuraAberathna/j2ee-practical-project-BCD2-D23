@@ -33,6 +33,11 @@
             <artifactId>jakarta.jakartaee-web-api</artifactId>
             <version>10.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.disuraaberathna</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </dependencyManagement>
 </project>
