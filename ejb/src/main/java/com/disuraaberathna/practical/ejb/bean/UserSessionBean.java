@@ -4,6 +4,7 @@ import com.disuraaberathna.practical.core.model.User;
 import com.disuraaberathna.practical.core.service.UserService;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
@@ -18,7 +19,11 @@ public class UserSessionBean implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return em.createNamedQuery("User.findByEmail", User.class).setParameter("email", email).getSingleResult();
+        try {
+            return em.createNamedQuery("User.findByEmail", User.class).setParameter("email", email).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -38,15 +43,19 @@ public class UserSessionBean implements UserService {
 
     @Override
     public boolean validateUser(String email, String password) {
+        try {
 //        User user = em.createNamedQuery("User.findByEmail", User.class)
 //                .setParameter("email", email)
 //                .getSingleResult();
 //        return user != null && user.getPassword().equals(password);
 
-        User user = em.createNamedQuery("User.findByEmailAndPassword", User.class)
-                .setParameter("email", email)
-                .setParameter("password", password)
-                .getSingleResult();
-        return user != null;
+            User user = em.createNamedQuery("User.findByEmailAndPassword", User.class)
+                    .setParameter("email", email)
+                    .setParameter("password", password)
+                    .getSingleResult();
+            return user != null;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 }
