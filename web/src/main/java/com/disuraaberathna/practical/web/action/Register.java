@@ -2,8 +2,8 @@ package com.disuraaberathna.practical.web.action;
 
 import com.disuraaberathna.practical.core.model.User;
 import com.disuraaberathna.practical.core.model.UserType;
-import com.disuraaberathna.practical.ejb.remote.UserService;
-import jakarta.inject.Inject;
+import com.disuraaberathna.practical.core.service.UserService;
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
-    @Inject
+    @EJB
     private UserService userService;
 
     @Override
@@ -27,5 +27,7 @@ public class Register extends HttpServlet {
         User user = new User(name, contact, email, password, UserType.USER);
 
         userService.addUser(user);
+
+        resp.sendRedirect(req.getContextPath()+"/login.jsp");
     }
 }
