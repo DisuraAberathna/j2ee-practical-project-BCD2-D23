@@ -35,4 +35,18 @@ public class UserSessionBean implements UserService {
     public void deleteUser(User user) {
         em.remove(user);
     }
+
+    @Override
+    public boolean validateUser(String email, String password) {
+//        User user = em.createNamedQuery("User.findByEmail", User.class)
+//                .setParameter("email", email)
+//                .getSingleResult();
+//        return user != null && user.getPassword().equals(password);
+
+        User user = em.createNamedQuery("User.findByEmailAndPassword", User.class)
+                .setParameter("email", email)
+                .setParameter("password", password)
+                .getSingleResult();
+        return user != null;
+    }
 }
