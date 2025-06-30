@@ -1,4 +1,4 @@
-package com.disuraaberathna.practical.ejb.model;
+package com.disuraaberathna.practical.core.model;
 
 import jakarta.persistence.*;
 
