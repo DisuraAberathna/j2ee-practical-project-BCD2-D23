@@ -22,6 +22,10 @@
     <dependencies>
         <dependency>
             <groupId>com.disuraaberathna</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.disuraaberathna</groupId>
             <artifactId>web</artifactId>
             <version>1.0</version>
             <type>war</type>
