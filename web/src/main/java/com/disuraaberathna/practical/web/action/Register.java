@@ -1,7 +1,9 @@
 package com.disuraaberathna.practical.web.action;
 
+import com.disuraaberathna.practical.core.mail.VerificationMail;
 import com.disuraaberathna.practical.core.model.User;
 import com.disuraaberathna.practical.core.model.UserType;
+import com.disuraaberathna.practical.core.provider.MailServiceProvider;
 import com.disuraaberathna.practical.core.service.UserService;
 import com.disuraaberathna.practical.core.util.Encryption;
 import jakarta.ejb.EJB;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
@@ -28,6 +31,10 @@ public class Register extends HttpServlet {
         String hashedPassword = Encryption.encryption(password);
 
         User user = new User(name, contact, email, hashedPassword, UserType.USER);
+
+        String verificationCode = UUID.randomUUID().toString();
+        VerificationMail mail=new VerificationMail(email, verificationCode);
+        MailServiceProvider.getInstance().sendMail(mail);
 
         userService.addUser(user);
 
