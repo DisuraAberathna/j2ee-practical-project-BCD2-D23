@@ -13,6 +13,7 @@
         <module>auth-module</module>
         <module>ear</module>
         <module>core</module>
+        <module>product-module</module>
     </modules>
 
     <properties>
