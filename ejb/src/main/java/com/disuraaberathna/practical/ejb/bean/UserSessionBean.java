@@ -2,6 +2,7 @@ package com.disuraaberathna.practical.ejb.bean;
 
 import com.disuraaberathna.practical.core.model.User;
 import com.disuraaberathna.practical.core.service.UserService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -31,11 +32,13 @@ public class UserSessionBean implements UserService {
         em.persist(user);
     }
 
+    @RolesAllowed({"SUPER_ADMIN", "ADMIN", "USER"})
     @Override
     public void updateUser(User user) {
         em.merge(user);
     }
 
+    @RolesAllowed({"SUPER_ADMIN", "ADMIN", "USER"})
     @Override
     public void deleteUser(User user) {
         em.remove(user);
