@@ -14,7 +14,7 @@ public class VerificationMail extends Mailable {
 
     @Override
     public void build(Message message) throws Exception {
-        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(to)});
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject("Verification Mail");
         message.setText("Your verification code is: " + verificationCode);
     }
