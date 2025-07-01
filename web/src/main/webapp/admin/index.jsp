@@ -12,7 +12,8 @@
 </head>
 <body>
 <main>
-  <h1>Hello, ${pageContext.request.userPrincipal.name}</h1>
+    <h1>Hello, ${pageContext.request.userPrincipal.name}</h1>
+    <a href="${pageContext.request.contextPath}/admin/addProduct.jsp">Add a New Product</a>
 </main>
 </body>
 </html>
