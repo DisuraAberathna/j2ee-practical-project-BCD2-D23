@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>com.disuraaberathna</groupId>
-            <artifactId>ejb</artifactId>
+            <artifactId>auth-module</artifactId>
             <version>1.0</version>
             <type>ejb</type>
         </dependency>
@@ -50,8 +50,8 @@
                     <modules>
                         <ejbModule>
                             <groupId>com.disuraaberathna</groupId>
-                            <artifactId>ejb</artifactId>
-                            <bundleFileName>ejb-module.jar</bundleFileName>
+                            <artifactId>auth-module</artifactId>
+                            <bundleFileName>auth-module.jar</bundleFileName>
                         </ejbModule>
                         <webModule>
                             <groupId>com.disuraaberathna</groupId>
