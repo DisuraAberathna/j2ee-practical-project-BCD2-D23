@@ -3,6 +3,7 @@ package com.disuraaberathna.practical.web.action;
 import com.disuraaberathna.practical.core.model.User;
 import com.disuraaberathna.practical.core.model.UserType;
 import com.disuraaberathna.practical.core.service.UserService;
+import com.disuraaberathna.practical.core.util.Encryption;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,7 +25,9 @@ public class Register extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        User user = new User(name, contact, email, password, UserType.USER);
+        String hashedPassword = Encryption.encryption(password);
+
+        User user = new User(name, contact, email, hashedPassword, UserType.USER);
 
         userService.addUser(user);
 
