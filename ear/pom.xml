@@ -36,6 +36,12 @@
             <version>1.0</version>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>com.disuraaberathna</groupId>
+            <artifactId>product-module</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,6 +58,11 @@
                             <groupId>com.disuraaberathna</groupId>
                             <artifactId>auth-module</artifactId>
                             <bundleFileName>auth-module.jar</bundleFileName>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>com.disuraaberathna</groupId>
+                            <artifactId>product-module</artifactId>
+                            <bundleFileName>product-module.jar</bundleFileName>
                         </ejbModule>
                         <webModule>
                             <groupId>com.disuraaberathna</groupId>
