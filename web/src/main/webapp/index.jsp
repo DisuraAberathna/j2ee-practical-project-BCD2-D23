@@ -44,12 +44,16 @@
             <th>Product</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
         </tr>
         <c:forEach var="product" items="${products}">
             <tr>
                 <td>${product.name}</td>
                 <td>${product.description}</td>
                 <td>${product.price}</td>
+                <td>${product.quantity}</td>
+                <td><a href="${pageContext.request.contextPath}/admin/delete-product?=id${product.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
