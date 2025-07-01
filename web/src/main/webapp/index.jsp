@@ -1,3 +1,8 @@
+<%@ page import="javax.naming.NamingException" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="com.disuraaberathna.practical.core.service.ProductService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.disuraaberathna.practical.core.model.Product" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -22,6 +27,32 @@
     <c:if test="${not empty pageContext.request.userPrincipal}">
         <a href="${pageContext.request.contextPath}/logout">Log Out</a>
     </c:if>
+
+    <%
+        try {
+            InitialContext ic = new InitialContext();
+            ProductService productService = (ProductService) ic.lookup("com.disuraaberathna.practical.core.service.ProductService");
+            List<Product> products = productService.getAllProducts();
+            pageContext.setAttribute("products", products);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
+    %>
+
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <c:forEach var="product" items="${products}">
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.description}</td>
+                <td>${product.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </main>
 </body>
 </html>
