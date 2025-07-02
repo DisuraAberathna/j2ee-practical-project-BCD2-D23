@@ -20,8 +20,11 @@ public class User implements Serializable {
     @Column(unique = true)
     private String email;
     private String password;
+    private String verificationCode;
     @Enumerated(EnumType.STRING)
     private UserType userType = UserType.USER;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.INACTIVE;
 
     public User() {
     }
@@ -74,11 +77,27 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
     public UserType getUserType() {
         return userType;
     }
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
