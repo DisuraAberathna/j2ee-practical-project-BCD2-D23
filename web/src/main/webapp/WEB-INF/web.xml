@@ -35,4 +35,8 @@
     <security-role>
         <role-name>USER</role-name>
     </security-role>
+    
+    <error-page>
+        <location>/500.jsp</location>
+    </error-page>
 </web-app>
