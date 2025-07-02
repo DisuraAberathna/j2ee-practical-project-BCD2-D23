@@ -1,6 +1,7 @@
 package com.disuraaberathna.practical.core.provider;
 
 import com.disuraaberathna.practical.core.mail.Mailable;
+import com.disuraaberathna.practical.core.util.Env;
 import jakarta.mail.Authenticator;
 import jakarta.mail.PasswordAuthentication;
 
@@ -14,14 +15,12 @@ public class MailServiceProvider {
     private final Properties properties = new Properties();
     private Authenticator authenticator;
     private static MailServiceProvider instance;
-    private static final String USERNAME = "c822a1050ba776";
-    private static final String PASSWORD = "6886f5dbf2250f";
     private ThreadPoolExecutor executor;
     private final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
 
     private MailServiceProvider() {
-        properties.setProperty("mail.smtp.host", "sandbox.smtp.mailtrap.io");
-        properties.setProperty("mail.smtp.port", "2525");
+        properties.setProperty("mail.smtp.host", Env.getProperty("mailtrap.host"));
+        properties.setProperty("mail.smtp.port", Env.getProperty("mailtrap.port"));
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "false");
     }
@@ -37,7 +36,7 @@ public class MailServiceProvider {
         authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USERNAME, PASSWORD);
+                return new PasswordAuthentication(Env.getProperty("mailtrap.username"), Env.getProperty("mailtrap.password"));
             }
         };
 
