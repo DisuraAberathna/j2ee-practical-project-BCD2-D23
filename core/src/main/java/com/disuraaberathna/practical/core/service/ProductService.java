@@ -4,12 +4,13 @@ import com.disuraaberathna.practical.core.model.Product;
 import jakarta.ejb.Remote;
 
 import java.util.List;
+import java.util.Optional;
 
 @Remote
 public interface ProductService {
-    Product getProductById(long id);
+    Optional<Product> getProductById(long id);
 
-    Product getProductByName(String name);
+    Optional<Product> getProductByName(String name);
 
     List<Product> getProductsByCategory(String category);
 
@@ -19,5 +20,5 @@ public interface ProductService {
 
     void updateProduct(Product product);
 
-    void deleteProduct(long id);
+    void deleteProduct(Long id);
 }
