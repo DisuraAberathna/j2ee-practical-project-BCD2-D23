@@ -27,7 +27,8 @@ public class Login extends HttpServlet {
 
         AuthenticationStatus status = securityContext.authenticate(req, resp, params);
         if (status == AuthenticationStatus.SUCCESS) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+//            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            resp.sendError(500, "Login Error...");
         } else {
             resp.sendRedirect(req.getContextPath() + "/login.jsp");
         }
