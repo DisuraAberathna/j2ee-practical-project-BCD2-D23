@@ -16,4 +16,6 @@ public interface UserService {
     void deleteUser(User user);
 
     boolean validateUser(String email, String password);
+
+    void verifyUser(User user);
 }
