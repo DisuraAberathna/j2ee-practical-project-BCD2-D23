@@ -1,7 +1,10 @@
 package com.disuraaberathna.practical.core.mail;
 
+import com.disuraaberathna.practical.core.util.Env;
 import jakarta.mail.Message;
 import jakarta.mail.internet.InternetAddress;
+
+import java.util.Base64;
 
 public class VerificationMail extends Mailable {
     private final String to;
@@ -16,6 +19,11 @@ public class VerificationMail extends Mailable {
     public void build(Message message) throws Exception {
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject("Verification Mail");
-        message.setText("Your verification code is: " + verificationCode);
+
+        String encode = Base64.getEncoder().encodeToString(to.getBytes());
+        String link = Env.getProperty("app.path") + "/verify?id=" + encode + "&vc=" + verificationCode;
+
+//        message.setText("Your verification code is: " + verificationCode);
+        message.setContent(link, "text/html; charset=utf-8");
     }
 }
