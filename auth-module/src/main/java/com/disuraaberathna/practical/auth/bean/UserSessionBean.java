@@ -61,4 +61,9 @@ public class UserSessionBean implements UserService {
             return false;
         }
     }
+
+    @Override
+    public void verifyUser(User user) {
+        em.merge(user);
+    }
 }
