@@ -7,8 +7,11 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
+import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class ProductSessionBean implements ProductService {
@@ -16,16 +19,18 @@ public class ProductSessionBean implements ProductService {
     private EntityManager em;
 
     @Override
-    public Product getProductById(long id) {
-        return em.find(Product.class, id);
+    public Optional<Product> getProductById(long id) {
+//        return em.find(Product.class, id);
+        return Optional.ofNullable(em.find(Product.class, id));
     }
 
     @Override
-    public Product getProductByName(String name) {
+    public Optional<Product> getProductByName(String name) {
         try {
-            return em.createNamedQuery("Product.findByName", Product.class).setParameter("name", name).getSingleResult();
+            TypedQuery<Product> query = em.createNamedQuery("Product.findByName", Product.class).setParameter("name", name);
+            return Optional.ofNullable(query.getSingleResult());
         } catch (NoResultException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -53,9 +58,12 @@ public class ProductSessionBean implements ProductService {
         em.merge(product);
     }
 
-    @RolesAllowed({"SUPER_ADMIN", "ADMIN"})
+    //    @RolesAllowed({"SUPER_ADMIN", "ADMIN"})
     @Override
-    public void deleteProduct(long id) {
+    public void deleteProduct(Long id) {
+        if (id == null || id < 0) {
+            throw new InvalidParameterException("Product id is null or negative");
+        }
         em.remove(getProductById(id));
     }
 }
