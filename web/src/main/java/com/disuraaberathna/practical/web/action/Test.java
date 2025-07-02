@@ -19,9 +19,9 @@ public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            productService.deleteProduct((long) 1);
+            productService.deleteProduct(null);
         } catch (Exception e) {
-            throw new LoginFailedException(e.getMessage());
+            throw e;
         }
     }
 }
