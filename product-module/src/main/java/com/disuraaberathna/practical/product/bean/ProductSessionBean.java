@@ -2,6 +2,7 @@ package com.disuraaberathna.practical.product.bean;
 
 import com.disuraaberathna.practical.core.model.Product;
 import com.disuraaberathna.practical.core.service.ProductService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -52,6 +53,7 @@ public class ProductSessionBean implements ProductService {
         em.merge(product);
     }
 
+    @RolesAllowed({"SUPER_ADMIN", "ADMIN"})
     @Override
     public void deleteProduct(long id) {
         em.remove(getProductById(id));
