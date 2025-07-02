@@ -1,5 +1,6 @@
 package com.disuraaberathna.practical.web.action;
 
+import com.disuraaberathna.practical.core.exception.LoginFailedException;
 import jakarta.inject.Inject;
 import jakarta.security.enterprise.AuthenticationStatus;
 import jakarta.security.enterprise.SecurityContext;
@@ -27,10 +28,9 @@ public class Login extends HttpServlet {
 
         AuthenticationStatus status = securityContext.authenticate(req, resp, params);
         if (status == AuthenticationStatus.SUCCESS) {
-//            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            resp.sendError(500, "Login Error...");
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
-            resp.sendRedirect(req.getContextPath() + "/login.jsp");
+            throw new LoginFailedException("Authentication Failed");
         }
     }
 }
