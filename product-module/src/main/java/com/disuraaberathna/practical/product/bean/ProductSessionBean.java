@@ -1,5 +1,6 @@
 package com.disuraaberathna.practical.product.bean;
 
+import com.disuraaberathna.practical.core.exception.InvalidParameterException;
 import com.disuraaberathna.practical.core.model.Product;
 import com.disuraaberathna.practical.core.service.ProductService;
 import jakarta.annotation.security.RolesAllowed;
@@ -9,7 +10,6 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 
