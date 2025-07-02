@@ -29,15 +29,16 @@ public class Register extends HttpServlet {
         String password = req.getParameter("password");
 
         String hashedPassword = Encryption.encryption(password);
+        String verificationCode = UUID.randomUUID().toString();
 
         User user = new User(name, contact, email, hashedPassword, UserType.USER);
+        user.setVerificationCode(verificationCode);
 
-        String verificationCode = UUID.randomUUID().toString();
-        VerificationMail mail=new VerificationMail(email, verificationCode);
+        VerificationMail mail = new VerificationMail(email, verificationCode);
         MailServiceProvider.getInstance().sendMail(mail);
 
         userService.addUser(user);
 
-        resp.sendRedirect(req.getContextPath()+"/login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 }
