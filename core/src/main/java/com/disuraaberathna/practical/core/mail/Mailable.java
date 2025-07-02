@@ -1,8 +1,8 @@
 package com.disuraaberathna.practical.core.mail;
 
 import com.disuraaberathna.practical.core.provider.MailServiceProvider;
+import com.disuraaberathna.practical.core.util.Env;
 import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
@@ -21,7 +21,7 @@ public abstract class Mailable implements Runnable {
             Session session = Session.getInstance(mailServiceProvider.getProperties(), mailServiceProvider.getAuthenticator());
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("app@j2ee.practical.com"));
+            message.setFrom(new InternetAddress(Env.getProperty("mailtrap.email")));
             build(message);
             Transport.send(message);
         } catch (Exception e) {
